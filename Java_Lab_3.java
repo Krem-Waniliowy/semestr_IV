@@ -52,8 +52,30 @@ class Zajecia {
             
             return nowy;
         }
-        // metoda mul
         
+        // 1. metoda mult dla obiektu
+        public Vector mult(Vector v2) {
+            // mnozenie wspolczynnikow wektorow przez siebie
+            double a = this.x * v2.x;
+            double b = this.y * v2.y;
+            double c = this.z * v2.z;
+            
+            Vector nowy = new Vector(a, b, c);
+            
+            return nowy;
+        }
+        
+        // 2. metoda mult dla zmiennej typu 'double'
+        public Vector mult(double i) {
+            // mnozymy wspolczynniki przez podana zmienna double
+            double a = this.x * i;
+            double b = this.y * i;
+            double c = this.z * i;
+            
+            Vector nowy = new Vector(a, b, c);
+            
+            return nowy;
+        }
     }
     
     public static void main(String[] args) {
@@ -67,5 +89,12 @@ class Zajecia {
         v1.odleglosc(v2);
         Vector v3 = v1.add(v2);
         v3.wypisz();
+        Vector v4 = v1.mult(v2);
+        System.out.println("Tutaj jest mult dla wektora:");
+        v4.wypisz();
+        v4 = v1.mult(10.0);
+        System.out.println("Tutaj jest mult dla doubla:");
+        v4.wypisz();
+        
     }
 }
