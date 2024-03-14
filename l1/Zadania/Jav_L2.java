@@ -1,56 +1,38 @@
 import java.util.Random;
-import java.util.Scanner;
 
-public class main {
+public class Main {
     
-    // funkcja quicksort
-    public static int quicksort(int tab[], int left, int right, int max_i) {
+    public static void quicksort(int tab[], int left, int right) {
 
         if(left < right) {
-        int d = divide(tab, left, right, max_i);
-
-        // Działamy na 2 podtablicach, z lewej i prawej strony elementu oznaczonego
-        // jako d, czyli j zwracanago przez funkcję divide
-        // Trochę jak na zasadzie binary search gdzie mamy lewą i prawą stronę od wskazanego elementu
-        // tylko tym razem element wskazywany jest przez indeks zwrócony przez funkcję divide
-        quicksort(tab, left, d - 1);
-        quicksort(tab, d + 1, right);
+            int d = divide(tab, left, right);
+            quicksort(tab, left, d - 1);
+            quicksort(tab, d + 1, right);
         }
-        return tab;
     }
     
-    // funkcja do podziału tablicy i zamiany elementów
-    public static int divide(int tab[], int left, int right, int max_i) {
+    public static int divide(int tab[], int left, int right) {
 
         Random r = new Random();
-        int low = 0;
-        int high = max_i;
-        int random_num = r.nextInt(high-low) + low;
+        int random_num = r.nextInt(right - left + 1) + left;
         int pivot = tab[random_num];
 
-        int temp = 0;
+        int i = left - 1;
 
-        int i = left;
-        int j = right;
-
-        while (true) {
-            while (tab[i] < tab[pivot]) {
+        for (int j = left; j < right; j++) {
+            if (tab[j] < pivot) {
                 i++;
-            }
-            while (tab[j] < tab[pivot]) {
-                j--;
-            }
-            if (i<j) {
-                temp = tab[i];
+                int temp = tab[i];
                 tab[i] = tab[j];
                 tab[j] = temp;
             }
-            if (i>= j) {
-                break;
-            }
         }
 
-        return j;
+        int temp = tab[i + 1];
+        tab[i + 1] = tab[right];
+        tab[right] = temp;
+
+        return i + 1;
     }
 
     public static void main (String[] args) {
@@ -61,7 +43,12 @@ public class main {
         for (int i = 0; i < size; i++) {
             System.out.print(tab[i] + " ");
         }
-        
-        return 0;
+        System.out.println();
+
+        quicksort(tab, 0, size - 1);
+
+        for (int i = 0; i < size; i++) {
+            System.out.print(tab[i] + " ");
+        }
     }
 }
