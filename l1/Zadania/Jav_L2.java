@@ -2,19 +2,29 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class main {
+    
+    // funkcja quicksort
+    public static int quicksort(int tab[], int left, int right, int max_i) {
 
-    public static int quicksort(int tab) {
+        if(left < right) {
+        int d = divide(tab, left, right, max_i);
 
-
+        // Działamy na 2 podtablicach, z lewej i prawej strony elementu oznaczonego
+        // jako d, czyli j zwracanago przez funkcję divide
+        // Trochę jak na zasadzie binary search gdzie mamy lewą i prawą stronę od wskazanego elementu
+        // tylko tym razem element wskazywany jest przez indeks zwrócony przez funkcję divide
+        quicksort(tab, left, d - 1);
+        quicksort(tab, d + 1, right);
+        }
         return tab;
     }
-
+    
     // funkcja do podziału tablicy i zamiany elementów
-    public static int divide(int tab[], int size, int left, int right) {
+    public static int divide(int tab[], int left, int right, int max_i) {
 
         Random r = new Random();
-        int low = 10;
-        int high = 100;
+        int low = 0;
+        int high = max_i;
         int random_num = r.nextInt(high-low) + low;
         int pivot = tab[random_num];
 
@@ -44,61 +54,14 @@ public class main {
     }
 
     public static void main (String[] args) {
-//        System.out.println("Hello!");
 
-//        double a = 2.0;
-//        double b = 3.0;
+        int size = 10;
+        int[] tab = {4, -12, 44, 10, -5, 0, -2, 123, 0, 45};
 
-        // zadanie nr.1
-//        System.out.println(Math.pow(a, b));
-//        System.out.println(Math.pow(b, a));
-//        System.out.println(Math.sqrt(a + b));
-
-        // zadanie nr.2
-//        int c = 1/0;
-//        double d = 1.0/0.0;
-//        double e = "xyz"; // co zrobić żeby dostać NaN -> 'Not a Number'
-
-//        System.out.println(c);
-//        System.out.println(d);
-//        System.out.println(e);
-
-        // zadanie nr.3
-//        boolean check = true;
-//        if (check) {
-//            check = false;
-//            System.out.println("Check zostało zamienione na 'False', patrz -> check: " + check);
-//        }
-
-        // zadanie nr.4
-//        Scanner in = new Scanner(System.in);
-//        String f = in.nextLine();
-//        int g = in.nextInt();
-
-//        System.out.println(f);
-//        System.out.println(g);
-
-        // zadanie nr.5
-        double a = 1;
-        double b = 0;
-        double c = 4;
-
-        double delta = (Math.pow(b, 2) - (4*a*c));
-        if (delta < 0) {
-            System.out.println("Delta jest mniejsza od 0! Brak rozwiązań!");
-
+        for (int i = 0; i < size; i++) {
+            System.out.print(tab[i] + " ");
         }
-        else {
-            double delta_sqrt = Math.sqrt(delta);
-
-            double x_1 = ((-b) - delta_sqrt)/(2*a);
-            double x_2 = ((-b) + delta_sqrt)/(2*a);
-
-            System.out.println(x_1);
-            System.out.println(x_2);
-        }
-
-
-
+        
+        return 0;
     }
 }
