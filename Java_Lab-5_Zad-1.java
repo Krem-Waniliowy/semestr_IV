@@ -1,70 +1,41 @@
-interface Moveable {
-    void start();
-    void stop();
-}
-
-interface Measurable {
-    int getWeight();
-}
-
-class Car implements Moveable, Measurable {
-    private int weight;
-
-    public Car(int weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public void start() {
-        System.out.println("Car started.");
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Car stopped.");
-    }
-
-    @Override
-    public int getWeight() {
-        return weight;
-    }
-}
-
-class Bike implements Moveable, Measurable {
-    private int weight;
-
-    public Bike(int weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public void start() {
-        System.out.println("Bike started.");
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Bike stopped.");
-    }
-
-    @Override
-    public int getWeight() {
-        return weight;
-    }
-}
-
 public class Main {
-    public static void main(String[] args) {
-        Car car = new Car(1500);
-        Bike bike = new Bike(20);
 
-        System.out.println("Waga samochodu: " + car.getWeight() + " kg");
-        System.out.println("Waga roweru: " + bike.getWeight() + " kg");
+  public static void main(String[] args) {
+    Sklep<String, Double> sklep1 = new Sklep<>("Chrupki", 4.99);
+    System.out.println("Produkt: " + sklep1.getJeden() + " Cena: " + sklep1.getDwa());
 
-        car.start();
-        car.stop();
+    Sklep<String, Double> sklep2 = new Sklep<>("Opona", 56.49);
+    System.out.println("Produkt: " + sklep2.getJeden() + " Cena: " + sklep2.getDwa());
+  }
 
-        bike.start();
-        bike.stop();
+  static class Sklep<A, B> {
+    private A jeden;
+    private B dwa;
+
+    // konstruktor
+    public Sklep(A jeden, B dwa) {
+      this.jeden = jeden;
+      this.dwa = dwa;
     }
+
+    // getter jeden
+    public A getJeden() {
+      return jeden;
+    }
+
+    // getter dwa
+    public B getDwa() {
+      return dwa;
+    }
+
+    // setter jeden
+    public void setJeden(A jeden) {
+      this.jeden = jeden;
+    }
+
+    // setter dwa
+    public void setDwa(B dwa) {
+      this.dwa = dwa;
+    }
+  }
 }
